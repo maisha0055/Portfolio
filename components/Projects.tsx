@@ -265,15 +265,10 @@ export function Projects() {
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
             >
-              <motion.div
-                className="flex gap-6 w-max py-3"
-                animate={{
-                  x: isPaused ? undefined : ['0%', '-33.333%'],
-                }}
-                transition={{
-                  repeat: Infinity,
-                  ease: 'linear',
-                  duration: 25,
+              <div
+                className="flex gap-6 w-max py-3 animate-marquee-infinite"
+                style={{
+                  animationPlayState: isPaused ? 'paused' : 'running',
                 }}
               >
                 {carouselRepos.map((repo, idx) => {
@@ -373,7 +368,7 @@ export function Projects() {
                     </div>
                   )
                 })}
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
