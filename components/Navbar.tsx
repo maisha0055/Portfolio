@@ -26,11 +26,11 @@ export function Navbar() {
         >
           <a
             href="#"
-            className="text-xl font-bold tracking-tight"
+            className="text-base sm:text-xl font-bold tracking-tight"
             style={{ color: '#6B8E23' }}
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
           >
-            JBM<span style={{ color: '#FFA07A' }}>.</span>
+            Jannatul Bushra Maisha<span style={{ color: '#FFA07A' }}>.</span>
           </a>
         </motion.div>
 
