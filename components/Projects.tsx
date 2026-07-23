@@ -28,8 +28,6 @@ const FEATURED_PROJECTS = [
 
 const EXCLUDED_PROJECTS = [
   'maisha0055',
-  'thesis-car',
-  'thesis_car',
   'worker-calling-frontend',
   'worker_calling_frontend'
 ]
@@ -43,6 +41,8 @@ const PROJECT_DISPLAY_NAMES: Record<string, string> = {
   'arduino-flight-controller': 'Arduino Flight Controller',
   'RoadSignNet-Sal': 'RoadSignNet-Sal',
   'roadsignnet-sal': 'RoadSignNet-Sal',
+  'thesis-car': 'Bluetooth-Controlled-Arduino-Robot-Car',
+  'thesis_car': 'Bluetooth-Controlled-Arduino-Robot-Car',
 }
 
 const PROJECT_DESCRIPTIONS: Record<string, string> = {
