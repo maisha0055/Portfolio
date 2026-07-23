@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   title: 'Jannatul Bushra Maisha | Full Stack Developer & ML Enthusiast',
   description: 'Computer Science student passionate about full-stack development, machine learning, and cybersecurity. Building secure and intelligent applications.',
   keywords: 'Full Stack Developer, Machine Learning, Web Development, Cybersecurity, MERN Stack, React, Node.js, Python, Next.js',
-  generator: 'v0.app',
   metadataBase: new URL('https://jannatul-bushra-maisha.vercel.app'),
   openGraph: {
     title: 'Jannatul Bushra Maisha | Full Stack Developer & ML Enthusiast',
@@ -37,20 +36,8 @@ export const metadata: Metadata = {
     description: 'Portfolio of a Full Stack Developer and ML Enthusiast',
   },
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
     apple: '/apple-icon.png',
   },
 }
