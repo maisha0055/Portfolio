@@ -88,12 +88,35 @@ export function Projects() {
   useEffect(() => {
     const fetchRepos = async () => {
       try {
+        // Check localStorage cache first (1 hour TTL)
+        const cacheKey = 'portfolio_repos_cache'
+        const cacheTimeKey = 'portfolio_repos_cache_time'
+        const cached = localStorage.getItem(cacheKey)
+        const cachedTime = localStorage.getItem(cacheTimeKey)
+
+        if (cached && cachedTime && Date.now() - parseInt(cachedTime) < 3600000) {
+          setRepos(JSON.parse(cached))
+          setLoading(false)
+          return
+        }
+
         const response = await fetch('https://api.github.com/users/maisha0055/repos?per_page=100&sort=updated')
         if (!response.ok) throw new Error('Failed to fetch repositories')
         const data = await response.json()
         setRepos(data)
         setLoading(false)
+
+        // Cache the response
+        localStorage.setItem(cacheKey, JSON.stringify(data))
+        localStorage.setItem(cacheTimeKey, Date.now().toString())
       } catch (err) {
+        // If fetch fails, try to use stale cache
+        const staleCache = localStorage.getItem('portfolio_repos_cache')
+        if (staleCache) {
+          setRepos(JSON.parse(staleCache))
+          setLoading(false)
+          return
+        }
         setError(err instanceof Error ? err.message : 'Failed to fetch repositories')
         setLoading(false)
       }
@@ -128,6 +151,23 @@ export function Projects() {
               <p style={{ color: '#6B7B5A' }}>Loading projects...</p>
             </div>
           </div>
+        </div>
+      </section>
+    )
+  }
+
+  if (error && repos.length === 0) {
+    return (
+      <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto text-center">
+          <p style={{ color: '#6B7B5A' }}>Unable to load projects. Please refresh the page.</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-4 px-6 py-2.5 text-white rounded-xl font-medium text-sm"
+            style={{ backgroundColor: '#6B8E23' }}
+          >
+            Retry
+          </button>
         </div>
       </section>
     )

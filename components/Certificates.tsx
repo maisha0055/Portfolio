@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import { FiAward, FiExternalLink, FiCheck, FiArrowRight } from 'react-icons/fi'
+import { FiAward, FiExternalLink, FiCheck } from 'react-icons/fi'
 
 interface Certificate {
   id: number
@@ -58,8 +58,8 @@ const certificates: Certificate[] = [
     issuer: 'IBM via Cognitive Class',
     credentialId: 'GPXX01RYEN',
     date: '2024',
-    pdfUrl: '/certificates/keys_and_constraints_in_mysql.pdf',
-    imgUrl: '/certificates/keys_and_constraints_in_mysql.pdf.png',
+    pdfUrl: '/certificates/ibm_gpxx01ryen.pdf',
+    imgUrl: '/certificates/ibm_gpxx01ryen.pdf.png',
     accentColor: '#8DB63C',
     accentRgb: '141, 182, 60',
     bullets: [
@@ -75,26 +75,10 @@ const certificates: Certificate[] = [
     issuer: 'IBM via Cognitive Class',
     credentialId: 'GPXX0MIIEN',
     date: '2024',
-    pdfUrl: '/certificates/data_analysis_with_python.pdf',
-    imgUrl: '/certificates/data_analysis_with_python.pdf.png',
+    pdfUrl: '/certificates/ibm_gpxx0miien.pdf',
+    imgUrl: '/certificates/ibm_gpxx0miien.pdf.png',
     accentColor: '#E8845A',
     accentRgb: '232, 132, 90',
-  },
-  {
-    id: 5,
-    title: 'MySQL command line',
-    issuer: 'IBM via Cognitive Class',
-    credentialId: 'UNKNOWN',
-    date: '2024',
-    pdfUrl: '/certificates/mysql-command-line.pdf',
-    imgUrl: '/certificates/mysql-command-line.pdf.png',
-    accentColor: '#FFA07A',
-    accentRgb: '255, 160, 122',
-    bullets: [
-      'Gained hands-on experience using the MySQL command line interface.',
-      'Executed SQL commands directly from the terminal.',
-      'Managed databases, tables, and data through CLI commands.',
-    ],
   },
 ]
 
@@ -120,8 +104,6 @@ const itemVariants = {
 
 export function Certificates() {
   const [hoveredId, setHoveredId] = useState<number | null>(null)
-  const [showAll, setShowAll] = useState(false)
-  const visibleCertificates = showAll ? certificates : certificates.slice(0, 4)
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F4F7EC' }}>
@@ -150,7 +132,7 @@ export function Certificates() {
           viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
-          {visibleCertificates.map((cert, index) => {
+          {certificates.map((cert, index) => {
             const isHovered = hoveredId === cert.id
 
             return (
@@ -276,23 +258,6 @@ export function Certificates() {
             )
           })}
         </motion.div>
-
-        {/* Show More Button */}
-        {!showAll && certificates.length > 4 && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mt-12 flex justify-end"
-          >
-            <button
-              onClick={() => setShowAll(true)}
-              className="group flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-olive border border-olive/30 hover:bg-olive hover:text-white transition-all shadow-sm hover:shadow-md active:scale-95"
-            >
-              View More Certificates
-              <FiArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </button>
-          </motion.div>
-        )}
       </div>
     </section>
   )
