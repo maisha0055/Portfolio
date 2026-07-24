@@ -79,16 +79,116 @@ const PROJECT_HOMEPAGES: Record<string, string> = {
   'Shohojogi': 'https://shohojogi-beta.vercel.app/',
 }
 
+const FALLBACK_REPOS: Repository[] = [
+  {
+    id: 1,
+    name: 'GIZMO_Frontend',
+    description: 'An integrated career networking and employment platform built with the MERN stack. Features include professional networking, job listings, and career development tools.',
+    html_url: 'https://github.com/maisha0055/GIZMO_Frontend',
+    homepage: null,
+    language: 'JavaScript',
+    topics: ['react', 'nodejs', 'mongodb', 'express'],
+    stargazers_count: 0,
+    forks_count: 0,
+  },
+  {
+    id: 2,
+    name: 'Shohojogi',
+    description: 'A full-stack platform that connects users with trusted local workers such as electricians, plumbers, carpenters, and more.',
+    html_url: 'https://github.com/maisha0055/Shohojogi',
+    homepage: 'https://shohojogi-beta.vercel.app/',
+    language: 'TypeScript',
+    topics: ['react', 'nextjs', 'tailwind', 'postgresql'],
+    stargazers_count: 0,
+    forks_count: 0,
+  },
+  {
+    id: 3,
+    name: 'ZERO-trust-Banking-system',
+    description: 'Developed a secure full-stack banking system using Django REST Framework and React TypeScript, implementing zero-trust security.',
+    html_url: 'https://github.com/maisha0055/ZERO-trust-Banking-system',
+    homepage: null,
+    language: 'TypeScript',
+    topics: ['django', 'react', 'security', 'postgresql'],
+    stargazers_count: 0,
+    forks_count: 0,
+  },
+  {
+    id: 4,
+    name: 'Residential-Evil',
+    description: 'A 3D horror survival game built with Python and PyOpenGL, featuring real-time rendering and AI-driven mannequin enemies.',
+    html_url: 'https://github.com/maisha0055/Residential-Evil',
+    homepage: null,
+    language: 'Python',
+    topics: ['python', 'pyopengl', 'ai'],
+    stargazers_count: 0,
+    forks_count: 0,
+  },
+  {
+    id: 5,
+    name: 'Arduino-flight-controller',
+    description: 'Developed a custom Arduino-based quadcopter flight controller with optimized PID tuning, sensor fusion, and a stable 250Hz control loop.',
+    html_url: 'https://github.com/maisha0055/Arduino-flight-controller',
+    homepage: null,
+    language: 'C++',
+    topics: ['arduino', 'cpp', 'embedded-systems', 'pid'],
+    stargazers_count: 0,
+    forks_count: 0,
+  },
+  {
+    id: 6,
+    name: '422-Prediction-of-Career-Changes-Using-Individual-and-Occupational-Factors',
+    description: 'Machine learning project predicting career changes based on individual and occupational factors using advanced analytics.',
+    html_url: 'https://github.com/maisha0055/422-Prediction-of-Career-Changes-Using-Individual-and-Occupational-Factors',
+    homepage: null,
+    language: 'Python',
+    topics: ['python', 'machine-learning', 'tensorflow'],
+    stargazers_count: 0,
+    forks_count: 0,
+  },
+  {
+    id: 7,
+    name: 'RoadSignNet-Sal',
+    description: 'Built an advanced computer vision system for road sign detection using YOLOv8, EfficientNet, DenseNet, and Vision Transformers.',
+    html_url: 'https://github.com/maisha0055/RoadSignNet-Sal',
+    homepage: null,
+    language: 'Python',
+    topics: ['computer-vision', 'yolov8', 'pytorch'],
+    stargazers_count: 0,
+    forks_count: 0,
+  },
+  {
+    id: 8,
+    name: 'thesis-car',
+    description: 'Bluetooth-controlled robot car developed with Arduino and custom motor control software.',
+    html_url: 'https://github.com/maisha0055/thesis-car',
+    homepage: null,
+    language: 'C++',
+    topics: ['arduino', 'robotics', 'bluetooth'],
+    stargazers_count: 0,
+    forks_count: 0,
+  },
+  {
+    id: 9,
+    name: 'MiniVSFS-C-based-VSFS-Image-Generator',
+    description: 'A C-based virtual file system implementation that generates raw disk images with inode-based file system structure.',
+    html_url: 'https://github.com/maisha0055/MiniVSFS-C-based-VSFS-Image-Generator',
+    homepage: null,
+    language: 'C',
+    topics: ['c', 'file-systems', 'systems-programming'],
+    stargazers_count: 0,
+    forks_count: 0,
+  },
+]
+
 export function Projects() {
-  const [repos, setRepos] = useState<Repository[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [repos, setRepos] = useState<Repository[]>(FALLBACK_REPOS)
+  const [loading, setLoading] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
     const fetchRepos = async () => {
       try {
-        // Check localStorage cache first (1 hour TTL)
         const cacheKey = 'portfolio_repos_cache'
         const cacheTimeKey = 'portfolio_repos_cache_time'
         const cached = localStorage.getItem(cacheKey)
@@ -96,29 +196,29 @@ export function Projects() {
 
         if (cached && cachedTime && Date.now() - parseInt(cachedTime) < 3600000) {
           setRepos(JSON.parse(cached))
-          setLoading(false)
           return
         }
 
         const response = await fetch('https://api.github.com/users/maisha0055/repos?per_page=100&sort=updated')
         if (!response.ok) throw new Error('Failed to fetch repositories')
         const data = await response.json()
-        setRepos(data)
-        setLoading(false)
-
-        // Cache the response
-        localStorage.setItem(cacheKey, JSON.stringify(data))
-        localStorage.setItem(cacheTimeKey, Date.now().toString())
+        if (Array.isArray(data) && data.length > 0) {
+          setRepos(data)
+          localStorage.setItem(cacheKey, JSON.stringify(data))
+          localStorage.setItem(cacheTimeKey, Date.now().toString())
+        }
       } catch (err) {
-        // If fetch fails, try to use stale cache
+        // Fallback to FALLBACK_REPOS if fetch fails or rate limited
         const staleCache = localStorage.getItem('portfolio_repos_cache')
         if (staleCache) {
-          setRepos(JSON.parse(staleCache))
-          setLoading(false)
-          return
+          try {
+            setRepos(JSON.parse(staleCache))
+          } catch {
+            setRepos(FALLBACK_REPOS)
+          }
+        } else {
+          setRepos(FALLBACK_REPOS)
         }
-        setError(err instanceof Error ? err.message : 'Failed to fetch repositories')
-        setLoading(false)
       }
     }
 
@@ -156,22 +256,6 @@ export function Projects() {
     )
   }
 
-  if (error && repos.length === 0) {
-    return (
-      <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto text-center">
-          <p style={{ color: '#6B7B5A' }}>Unable to load projects. Please refresh the page.</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="mt-4 px-6 py-2.5 text-white rounded-xl font-medium text-sm"
-            style={{ backgroundColor: '#6B8E23' }}
-          >
-            Retry
-          </button>
-        </div>
-      </section>
-    )
-  }
 
   return (
     <>
