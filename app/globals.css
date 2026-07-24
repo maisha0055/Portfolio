@@ -174,13 +174,16 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+
   html {
     scroll-behavior: smooth;
   }
+
   section[id] {
     scroll-margin-top: 5rem;
   }
@@ -190,12 +193,12 @@
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-33.333333%);
   }
 }
 
 .animate-marquee-infinite {
-  animation: marquee-infinite 18s linear infinite;
+  animation: marquee-infinite 40s linear infinite;
 }
-
