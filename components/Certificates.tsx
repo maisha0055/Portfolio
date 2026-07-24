@@ -99,6 +99,8 @@ export function Certificates() {
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
 
+  const hoveredCert = certificates.find(c => c.id === hoveredId) || null
+
   const checkScroll = () => {
     if (!scrollRef.current) return
     const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current
@@ -149,7 +151,7 @@ export function Certificates() {
           </p>
         </motion.div>
 
-        {/* Certificates Horizontal Carousel Container */}
+        {/* Certificates Horizontal Carousel */}
         <div className="relative">
           {/* Navigation Arrow Left */}
           <AnimatePresence>
@@ -188,173 +190,149 @@ export function Certificates() {
           {/* Scrollable Container */}
           <div
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto py-8 px-1 scroll-smooth"
+            className="flex gap-6 overflow-x-auto py-6 px-1 scroll-smooth"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {certificates.map((cert) => {
               const isHovered = hoveredId === cert.id
-              const hasBullets = cert.bullets && cert.bullets.length > 0
 
               return (
                 <motion.div
                   key={cert.id}
-                  className="relative shrink-0 cursor-pointer"
+                  className="relative shrink-0 w-[260px] sm:w-[280px] cursor-pointer"
                   onMouseEnter={() => setHoveredId(cert.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   animate={{
-                    width: isHovered ? (hasBullets ? 560 : 400) : 260,
+                    scale: isHovered ? 1.06 : 1,
+                    zIndex: isHovered ? 20 : 1,
                   }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <motion.div
-                    className="rounded-2xl overflow-hidden border bg-white relative h-full"
-                    animate={{
-                      borderColor: isHovered ? `rgba(${cert.accentRgb}, 0.5)` : 'rgba(226,221,207,0.7)',
+                  <div
+                    className="bg-white rounded-2xl overflow-hidden border transition-all duration-300 relative"
+                    style={{
+                      borderColor: isHovered ? `rgba(${cert.accentRgb}, 0.6)` : 'rgba(226,221,207,0.7)',
                       boxShadow: isHovered
-                        ? `0 25px 60px -15px rgba(${cert.accentRgb}, 0.3), 0 10px 25px -5px rgba(0,0,0,0.1)`
+                        ? `0 20px 50px -12px rgba(${cert.accentRgb}, 0.35), 0 8px 20px -4px rgba(0,0,0,0.1)`
                         : '0 2px 10px rgba(0,0,0,0.04)',
                     }}
-                    transition={{ duration: 0.35 }}
                   >
-                    <div className="flex h-full">
-                      {/* Certificate Image */}
-                      <motion.div
-                        className="relative bg-white flex items-center justify-center p-3 overflow-hidden shrink-0"
-                        animate={{
-                          width: isHovered ? 260 : 260,
-                          height: isHovered ? 280 : 220,
-                        }}
-                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      >
-                        <img
-                          src={cert.imgUrl}
-                          alt={cert.title}
-                          className="max-w-full max-h-full object-contain rounded-lg"
-                        />
-
-                        {/* Overlay for non-bullet certs on hover */}
-                        <AnimatePresence>
-                          {isHovered && !hasBullets && (
-                            <motion.div
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              exit={{ opacity: 0 }}
-                              transition={{ duration: 0.25 }}
-                              className="absolute inset-0 flex flex-col items-center justify-end p-4"
-                              style={{
-                                background: 'linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.55) 100%)',
-                              }}
-                            >
-                              <a
-                                href={cert.pdfUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-xl text-xs font-semibold text-white transition-all shadow-md hover:shadow-lg active:scale-95"
-                                style={{ backgroundColor: cert.accentColor }}
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <FiExternalLink size={13} />
-                                View Full Certificate
-                              </a>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </motion.div>
-
-                      {/* Details Panel — slides in on hover (only for certs with bullets) */}
-                      <AnimatePresence>
-                        {isHovered && hasBullets && (
-                          <motion.div
-                            initial={{ opacity: 0, width: 0 }}
-                            animate={{ opacity: 1, width: 300 }}
-                            exit={{ opacity: 0, width: 0 }}
-                            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                            className="overflow-hidden border-l shrink-0"
-                            style={{ borderColor: `rgba(${cert.accentRgb}, 0.15)` }}
-                          >
-                            <div className="p-5 h-full flex flex-col justify-between" style={{ width: 300 }}>
-                              {/* Header */}
-                              <div>
-                                <div className="flex items-center gap-2 mb-2">
-                                  <span
-                                    className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border"
-                                    style={{
-                                      backgroundColor: `rgba(${cert.accentRgb}, 0.1)`,
-                                      borderColor: `rgba(${cert.accentRgb}, 0.25)`,
-                                      color: cert.accentColor,
-                                    }}
-                                  >
-                                    {cert.issuer}
-                                  </span>
-                                  <span className="text-[10px] font-medium" style={{ color: '#9CA38A' }}>{cert.date}</span>
-                                </div>
-
-                                <h4 className="text-sm font-bold text-foreground mb-3 leading-snug">
-                                  {cert.title}
-                                </h4>
-
-                                {/* Bullets */}
-                                <ul className="space-y-2">
-                                  {cert.bullets!.map((bullet, idx) => (
-                                    <li key={idx} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: '#6B7B5A' }}>
-                                      <span
-                                        className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5"
-                                        style={{ backgroundColor: `rgba(${cert.accentRgb}, 0.15)`, color: cert.accentColor }}
-                                      >
-                                        <FiCheck size={9} />
-                                      </span>
-                                      <span>{bullet}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-
-                              {/* View Certificate Button */}
-                              <a
-                                href={cert.pdfUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="mt-4 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-white transition-all shadow-sm hover:shadow-md active:scale-95"
-                                style={{ backgroundColor: cert.accentColor }}
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <FiExternalLink size={13} />
-                                View Full Certificate
-                              </a>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                    {/* Certificate Image */}
+                    <div className="relative w-full bg-white overflow-hidden p-3 flex items-center justify-center" style={{ aspectRatio: '4/3' }}>
+                      <img
+                        src={cert.imgUrl}
+                        alt={cert.title}
+                        className="max-w-full max-h-full object-contain rounded-sm"
+                      />
                     </div>
 
-                    {/* Bottom Title Label (visible when NOT hovered) */}
-                    <AnimatePresence>
-                      {!isHovered && (
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="p-3 bg-card border-t border-border/40 flex items-center gap-2"
-                        >
-                          <div
-                            className="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0"
-                            style={{ backgroundColor: cert.accentColor }}
-                          >
-                            <FiAward className="w-3 h-3 text-white" />
-                          </div>
-                          <p className="text-xs font-bold text-foreground truncate flex-1">
-                            {cert.title}
-                          </p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
+                    {/* Title Label */}
+                    <div className="p-3 bg-card border-t border-border/40 flex items-center gap-2">
+                      <div
+                        className="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: cert.accentColor }}
+                      >
+                        <FiAward className="w-3 h-3 text-white" />
+                      </div>
+                      <p className="text-xs font-bold text-foreground truncate flex-1">
+                        {cert.title}
+                      </p>
+                    </div>
+                  </div>
                 </motion.div>
               )
             })}
           </div>
         </div>
+
+        {/* Details Pop-up Box — appears below carousel on hover */}
+        <AnimatePresence mode="wait">
+          {hoveredCert && (
+            <motion.div
+              key={hoveredCert.id}
+              initial={{ opacity: 0, y: -10, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -8, scale: 0.97 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-4 rounded-2xl border bg-white/95 backdrop-blur-xl overflow-hidden"
+              style={{
+                borderColor: `rgba(${hoveredCert.accentRgb}, 0.35)`,
+                boxShadow: `0 20px 50px -15px rgba(${hoveredCert.accentRgb}, 0.2), 0 8px 25px -5px rgba(0,0,0,0.08)`,
+              }}
+              onMouseEnter={() => setHoveredId(hoveredCert.id)}
+              onMouseLeave={() => setHoveredId(null)}
+            >
+              <div className="flex flex-col sm:flex-row">
+                {/* Certificate Preview Image */}
+                <div className="sm:w-[300px] shrink-0 bg-white p-5 flex items-center justify-center border-b sm:border-b-0 sm:border-r" style={{ borderColor: `rgba(${hoveredCert.accentRgb}, 0.15)` }}>
+                  <img
+                    src={hoveredCert.imgUrl}
+                    alt={hoveredCert.title}
+                    className="max-w-full max-h-[220px] object-contain rounded-lg"
+                    style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
+                  />
+                </div>
+
+                {/* Details Panel */}
+                <div className="flex-1 p-6 flex flex-col justify-between">
+                  {/* Header */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span
+                        className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border"
+                        style={{
+                          backgroundColor: `rgba(${hoveredCert.accentRgb}, 0.1)`,
+                          borderColor: `rgba(${hoveredCert.accentRgb}, 0.25)`,
+                          color: hoveredCert.accentColor,
+                        }}
+                      >
+                        {hoveredCert.issuer}
+                      </span>
+                      <span className="text-[11px] font-medium" style={{ color: '#9CA38A' }}>{hoveredCert.date}</span>
+                    </div>
+
+                    <h4 className="text-lg font-bold text-foreground mb-1 leading-snug">
+                      {hoveredCert.title}
+                    </h4>
+
+                    <p className="text-[10px] mb-4 font-mono" style={{ color: '#9CA38A' }}>
+                      Credential ID: {hoveredCert.credentialId}
+                    </p>
+
+                    {/* Bullet Details */}
+                    {hoveredCert.bullets && hoveredCert.bullets.length > 0 && (
+                      <ul className="space-y-2 mb-5">
+                        {hoveredCert.bullets.map((bullet, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm leading-relaxed" style={{ color: '#5A6B4A' }}>
+                            <span
+                              className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                              style={{ backgroundColor: `rgba(${hoveredCert.accentRgb}, 0.15)`, color: hoveredCert.accentColor }}
+                            >
+                              <FiCheck size={10} />
+                            </span>
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  {/* View Full Certificate Button */}
+                  <a
+                    href={hoveredCert.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all shadow-md hover:shadow-lg active:scale-95 w-full sm:w-auto self-start"
+                    style={{ backgroundColor: hoveredCert.accentColor }}
+                  >
+                    <FiExternalLink size={14} />
+                    View Full Certificate
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   )
