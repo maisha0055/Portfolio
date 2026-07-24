@@ -22,10 +22,10 @@ const certificates: Certificate[] = [
     id: 1,
     title: 'Data Visualization and Dashboards with Excel and Cognos',
     issuer: 'IBM via Coursera',
-    credentialId: 'O4WMP683JMHG',
+    credentialId: 'JWNFYD5X7B70',
     date: '2023',
-    pdfUrl: '/certificates/coursera_o4wmp683jmhg.pdf',
-    imgUrl: '/certificates/coursera_o4wmp683jmhg.pdf.png',
+    pdfUrl: '/certificates/coursera_jwnfyd5x7b70.pdf',
+    imgUrl: '/certificates/coursera_jwnfyd5x7b70.pdf.png',
     accentColor: '#6B8E23',
     accentRgb: '107, 142, 35',
     bullets: [
@@ -39,10 +39,10 @@ const certificates: Certificate[] = [
     id: 2,
     title: 'Excel Basics for Data Analysis',
     issuer: 'Coursera',
-    credentialId: 'JWNFYD5X7B70',
+    credentialId: 'O4WMP683JMHG',
     date: '2023',
-    pdfUrl: '/certificates/coursera_jwnfyd5x7b70.pdf',
-    imgUrl: '/certificates/coursera_jwnfyd5x7b70.pdf.png',
+    pdfUrl: '/certificates/coursera_o4wmp683jmhg.pdf',
+    imgUrl: '/certificates/coursera_o4wmp683jmhg.pdf.png',
     accentColor: '#FFA07A',
     accentRgb: '255, 160, 122',
     bullets: [
@@ -221,11 +221,11 @@ export function Certificates() {
                         : '0 2px 10px rgba(0,0,0,0.03)',
                     }}
                   >
-                    <div className="relative w-full bg-white overflow-hidden" style={{ aspectRatio: '4/3' }}>
+                    <div className="relative w-full bg-white overflow-hidden p-2 flex items-center justify-center" style={{ aspectRatio: '4/3' }}>
                       <img
                         src={cert.imgUrl}
                         alt={cert.title}
-                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105 rounded-sm"
                       />
                       <div
                         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
