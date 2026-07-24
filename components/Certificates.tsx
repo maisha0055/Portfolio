@@ -20,23 +20,6 @@ interface Certificate {
 const certificates: Certificate[] = [
   {
     id: 1,
-    title: 'Excel Basics for Data Analysis',
-    issuer: 'Coursera',
-    credentialId: 'JWNFYD5X7B70',
-    date: '2023',
-    pdfUrl: '/certificates/coursera_jwnfyd5x7b70.pdf',
-    imgUrl: '/certificates/coursera_jwnfyd5x7b70.pdf.png',
-    accentColor: '#FFA07A',
-    accentRgb: '255, 160, 122',
-    bullets: [
-      'Display working knowledge of Excel for Data Analysis.',
-      'Perform basic spreadsheet tasks including navigation, data entry, and using formulas.',
-      'Employ data quality techniques to import and clean data in Excel.',
-      'Analyze data in spreadsheets by using filter, sort, look-up functions, as well as pivot tables.',
-    ],
-  },
-  {
-    id: 2,
     title: 'Data Visualization and Dashboards with Excel and Cognos',
     issuer: 'IBM via Coursera',
     credentialId: 'O4WMP683JMHG',
@@ -50,6 +33,23 @@ const certificates: Certificate[] = [
       'Built interactive dashboards and visual reports to communicate data-driven insights.',
       'Applied data analysis techniques including pivot tables, charts, and reporting tools.',
       'Gained practical skills in transforming raw data into clear, actionable business insights.',
+    ],
+  },
+  {
+    id: 2,
+    title: 'Excel Basics for Data Analysis',
+    issuer: 'Coursera',
+    credentialId: 'JWNFYD5X7B70',
+    date: '2023',
+    pdfUrl: '/certificates/coursera_jwnfyd5x7b70.pdf',
+    imgUrl: '/certificates/coursera_jwnfyd5x7b70.pdf.png',
+    accentColor: '#FFA07A',
+    accentRgb: '255, 160, 122',
+    bullets: [
+      'Display working knowledge of Excel for Data Analysis.',
+      'Perform basic spreadsheet tasks including navigation, data entry, and using formulas.',
+      'Employ data quality techniques to import and clean data in Excel.',
+      'Analyze data in spreadsheets by using filter, sort, look-up functions, as well as pivot tables.',
     ],
   },
   {

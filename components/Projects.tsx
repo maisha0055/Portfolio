@@ -77,6 +77,10 @@ const PROJECT_TECHS: Record<string, string[]> = {
 
 const PROJECT_HOMEPAGES: Record<string, string> = {
   'Shohojogi': 'https://shohojogi-beta.vercel.app/',
+  'GIZMO_Frontend': 'https://github.com/maisha0055/GIZMO_Frontend',
+  'Gizmo_Frontend': 'https://github.com/maisha0055/GIZMO_Frontend',
+  'ZERO-trust-Banking-system': 'https://github.com/maisha0055/ZERO-trust-Banking-system',
+  'Zero-Trust-Banking-System': 'https://github.com/maisha0055/ZERO-trust-Banking-system',
 }
 
 const FALLBACK_REPOS: Repository[] = [
@@ -85,7 +89,7 @@ const FALLBACK_REPOS: Repository[] = [
     name: 'GIZMO_Frontend',
     description: 'An integrated career networking and employment platform built with the MERN stack. Features include professional networking, job listings, and career development tools.',
     html_url: 'https://github.com/maisha0055/GIZMO_Frontend',
-    homepage: null,
+    homepage: 'https://github.com/maisha0055/GIZMO_Frontend',
     language: 'JavaScript',
     topics: ['react', 'nodejs', 'mongodb', 'express'],
     stargazers_count: 0,
@@ -107,7 +111,7 @@ const FALLBACK_REPOS: Repository[] = [
     name: 'ZERO-trust-Banking-system',
     description: 'Developed a secure full-stack banking system using Django REST Framework and React TypeScript, implementing zero-trust security.',
     html_url: 'https://github.com/maisha0055/ZERO-trust-Banking-system',
-    homepage: null,
+    homepage: 'https://github.com/maisha0055/ZERO-trust-Banking-system',
     language: 'TypeScript',
     topics: ['django', 'react', 'security', 'postgresql'],
     stargazers_count: 0,
