@@ -3,7 +3,7 @@
 import { motion, useAnimationControls } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { SiGithub } from 'react-icons/si'
-import { FiExternalLink, FiStar, FiGitBranch, FiFolder } from 'react-icons/fi'
+import { FiExternalLink, FiStar, FiGitBranch, FiFolder, FiPlay, FiDownload } from 'react-icons/fi'
 
 interface Repository {
   id: number
@@ -331,7 +331,7 @@ export function Projects() {
                     </div>
 
                     {/* Buttons */}
-                    <div className="flex gap-3">
+                    <div className="flex flex-wrap gap-3">
                       <a
                         href={repo.html_url}
                         target="_blank"
@@ -357,6 +357,38 @@ export function Projects() {
                           <FiExternalLink size={16} />
                           Live Demo
                         </a>
+                      )}
+                      {repo.name === 'Residential-Evil' && (
+                        <>
+                          <a
+                            href="https://drive.google.com/file/d/19_qE766Ah0q06gMmPCfeAHiqu9_7PndP/view?usp=sharing"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold transition-all duration-300 text-sm border hover:shadow-md"
+                            style={{
+                              color: '#7B2D8E',
+                              borderColor: 'rgba(123, 45, 142, 0.4)',
+                              backgroundColor: 'rgba(123, 45, 142, 0.08)',
+                            }}
+                          >
+                            <FiPlay size={16} />
+                            Demo Video
+                          </a>
+                          <a
+                            href="https://v0-information-page-with-download.vercel.app"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold transition-all duration-300 text-sm border hover:shadow-md"
+                            style={{
+                              color: '#2D6B8E',
+                              borderColor: 'rgba(45, 107, 142, 0.4)',
+                              backgroundColor: 'rgba(45, 107, 142, 0.08)',
+                            }}
+                          >
+                            <FiDownload size={16} />
+                            Download
+                          </a>
+                        </>
                       )}
                     </div>
                   </div>
