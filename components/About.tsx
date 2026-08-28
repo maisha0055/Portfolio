@@ -142,15 +142,19 @@ export function About() {
 
           <div className="space-y-6 text-foreground/90 text-base md:text-lg leading-relaxed">
             <p>
-              Hi! I&apos;m <span className="font-bold text-foreground" style={{ color: '#6B8E23' }}>Jannatul Bushra Maisha</span>, a Computer Science student at <span className="font-semibold text-foreground">BRAC University</span> and an aspiring <span className="font-semibold text-foreground" style={{ color: '#6B8E23' }}>Software Engineer</span> with a passion for building modern, scalable, and user-centric web applications. I enjoy transforming ideas into real-world software by combining clean code, thoughtful design, and strong engineering principles.
+              Hi! I&apos;m <span className="font-bold text-foreground" style={{ color: '#6B8E23' }}>Jannatul Bushra Maisha</span>, a Computer Science student at <span className="font-semibold text-foreground">BRAC University</span> and an aspiring <span className="font-semibold text-foreground" style={{ color: '#6B8E23' }}>Software Engineer</span> who loves turning ideas into real, working software. There&apos;s something deeply satisfying about taking a rough concept and shaping it, line by line, into something people can actually use.
             </p>
 
             <p style={{ color: '#6B7B5A' }}>
-              My primary focus is <span className="font-semibold text-foreground">full-stack web development</span>, where I love creating responsive, secure, and high-performance applications using modern technologies. From designing intuitive user interfaces to developing robust backend systems and APIs, I enjoy every stage of the software development lifecycle. Building projects that solve real-world problems and deliver meaningful user experiences is what motivates me the most.
+              <span className="font-semibold text-foreground">Full-stack web development</span> is where I feel most at home. I enjoy the entire journey: sketching out an intuitive interface, architecting a backend that holds up under pressure, and wiring it all together through clean, well-thought-out APIs. Every layer teaches me something different, and that&apos;s exactly why I love it.
             </p>
 
             <p style={{ color: '#6B7B5A' }}>
-              Beyond web development, I&apos;m continuously exploring <span className="font-semibold" style={{ color: '#8DB63C' }}>Data Analytics</span>, <span className="font-semibold" style={{ color: '#E8845A' }}>Cybersecurity</span>, and <span className="font-semibold text-foreground">Cryptography</span> ~to deepen my understanding of intelligent and secure software systems. I&apos;m always eager to learn new technologies, collaborate with talented people, and build impactful software that makes a difference.
+              Lately, I&apos;ve been pulled deeper into <span className="font-semibold" style={{ color: '#8DB63C' }}>Data Analytics</span>, <span className="font-semibold" style={{ color: '#E8845A' }}>Cybersecurity</span>, and <span className="font-semibold text-foreground">Cryptography</span>, not just as topics to study, but as puzzles to actually build with. That curiosity led me to design and build a full-stack <span className="font-semibold text-foreground" style={{ color: '#6B8E23' }}>Zero-Trust banking platform</span> from scratch: encrypted transactions, tamper-proof data integrity, role-based access control, the works. Somewhere in the middle of building it, I realized I wasn&apos;t just interested in making software secure, I was genuinely fascinated by how technology, trust, and finance intersect, and that&apos;s a space I&apos;d love to keep building in.
+            </p>
+
+            <p style={{ color: '#6B7B5A' }}>
+              I&apos;m the kind of person who&apos;s always mid-way through learning something new. I&apos;m always eager to learn new technologies, collaborate with talented people, and build impactful software that makes a difference.
             </p>
           </div>
 

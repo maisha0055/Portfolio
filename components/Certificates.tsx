@@ -262,13 +262,13 @@ export function Certificates() {
               onMouseEnter={() => setHoveredId(hoveredCert.id)}
               onMouseLeave={() => setHoveredId(null)}
             >
-              <div className="flex flex-col sm:flex-row">
+              <div className="flex flex-col">
                 {/* Certificate Preview Image */}
-                <div className="sm:w-[300px] shrink-0 bg-white p-5 flex items-center justify-center border-b sm:border-b-0 sm:border-r" style={{ borderColor: `rgba(${hoveredCert.accentRgb}, 0.15)` }}>
+                <div className="w-full bg-white p-6 flex items-center justify-center border-b" style={{ borderColor: `rgba(${hoveredCert.accentRgb}, 0.15)` }}>
                   <img
                     src={hoveredCert.imgUrl}
                     alt={hoveredCert.title}
-                    className="max-w-full max-h-[220px] object-contain rounded-lg"
+                    className="max-w-full max-h-[300px] object-contain rounded-lg"
                     style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
                   />
                 </div>
