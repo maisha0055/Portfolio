@@ -18,6 +18,7 @@ interface Repository {
 }
 
 const FEATURED_PROJECTS = [
+  'Artha_Expense-Budget-Tracker',
   'GIZMO_Frontend',
   'Shohojogi',
   'ZERO-trust-Banking-system',
@@ -33,6 +34,10 @@ const EXCLUDED_PROJECTS = [
 ]
 
 const PROJECT_DISPLAY_NAMES: Record<string, string> = {
+  'Artha_Expense-Budget-Tracker': 'ARTHA — Expense & Budget Tracker',
+  'artha_expense-budget-tracker': 'ARTHA — Expense & Budget Tracker',
+  'Artha-Expense-Budget-Tracker': 'ARTHA — Expense & Budget Tracker',
+  'artha-expense-budget-tracker': 'ARTHA — Expense & Budget Tracker',
   'GIZMO_Frontend': 'Gizmo',
   'Gizmo_Frontend': 'Gizmo',
   'ZERO-trust-Banking-system': 'Zero Trust Banking System',
@@ -46,6 +51,10 @@ const PROJECT_DISPLAY_NAMES: Record<string, string> = {
 }
 
 const PROJECT_DESCRIPTIONS: Record<string, string> = {
+  'Artha_Expense-Budget-Tracker': 'ARTHA is a secure, responsive, full-stack personal finance and budget management platform designed to help users track transactions, establish monthly category budgets, and analyze spending patterns with real-time budget threshold warnings.',
+  'artha_expense-budget-tracker': 'ARTHA is a secure, responsive, full-stack personal finance and budget management platform designed to help users track transactions, establish monthly category budgets, and analyze spending patterns with real-time budget threshold warnings.',
+  'Artha-Expense-Budget-Tracker': 'ARTHA is a secure, responsive, full-stack personal finance and budget management platform designed to help users track transactions, establish monthly category budgets, and analyze spending patterns with real-time budget threshold warnings.',
+  'artha-expense-budget-tracker': 'ARTHA is a secure, responsive, full-stack personal finance and budget management platform designed to help users track transactions, establish monthly category budgets, and analyze spending patterns with real-time budget threshold warnings.',
   'GIZMO_Frontend': 'An integrated career networking and employment platform built with the MERN stack. Features include professional networking, job listings, and career development tools.',
   'Gizmo_Frontend': 'An integrated career networking and employment platform built with the MERN stack. Features include professional networking, job listings, and career development tools.',
   'Shohojogi': 'A full-stack platform that connects users with trusted local workers such as electricians, plumbers, carpenters, and more. Designed to provide reliable service listings, seamless user interactions, and a modern, efficient workflow.',
@@ -61,6 +70,10 @@ const PROJECT_DESCRIPTIONS: Record<string, string> = {
 }
 
 const PROJECT_TECHS: Record<string, string[]> = {
+  'Artha_Expense-Budget-Tracker': ['.NET 8', 'React', 'TypeScript', 'Tailwind CSS', 'MySQL', 'Docker'],
+  'artha_expense-budget-tracker': ['.NET 8', 'React', 'TypeScript', 'Tailwind CSS', 'MySQL', 'Docker'],
+  'Artha-Expense-Budget-Tracker': ['.NET 8', 'React', 'TypeScript', 'Tailwind CSS', 'MySQL', 'Docker'],
+  'artha-expense-budget-tracker': ['.NET 8', 'React', 'TypeScript', 'Tailwind CSS', 'MySQL', 'Docker'],
   'GIZMO_Frontend': ['React', 'Node.js', 'MongoDB', 'Express'],
   'Gizmo_Frontend': ['React', 'Node.js', 'MongoDB', 'Express'],
   'Shohojogi': ['React', 'TypeScript', 'Tailwind CSS', 'PostgreSQL'],
@@ -76,6 +89,10 @@ const PROJECT_TECHS: Record<string, string[]> = {
 }
 
 const PROJECT_HOMEPAGES: Record<string, string> = {
+  'Artha_Expense-Budget-Tracker': 'https://artha-expense.vercel.app',
+  'artha_expense-budget-tracker': 'https://artha-expense.vercel.app',
+  'Artha-Expense-Budget-Tracker': 'https://artha-expense.vercel.app',
+  'artha-expense-budget-tracker': 'https://artha-expense.vercel.app',
   'Shohojogi': 'https://shohojogi-beta.vercel.app/',
   'GIZMO_Frontend': 'https://gizmo-frontend.vercel.app/',
   'Gizmo_Frontend': 'https://gizmo-frontend.vercel.app/',
@@ -84,6 +101,17 @@ const PROJECT_HOMEPAGES: Record<string, string> = {
 }
 
 const FALLBACK_REPOS: Repository[] = [
+  {
+    id: 1422507846,
+    name: 'Artha_Expense-Budget-Tracker',
+    description: 'ARTHA is a secure, responsive, full-stack personal finance and budget management platform designed to help users track transactions, establish monthly category budgets, and analyze spending patterns with real-time budget threshold warnings.',
+    html_url: 'https://github.com/maisha0055/Artha_Expense-Budget-Tracker',
+    homepage: 'https://artha-expense.vercel.app',
+    language: 'TypeScript',
+    topics: ['react', 'dotnet', 'typescript', 'tailwind', 'mysql', 'docker'],
+    stargazers_count: 0,
+    forks_count: 0,
+  },
   {
     id: 1,
     name: 'GIZMO_Frontend',
@@ -193,8 +221,8 @@ export function Projects() {
   useEffect(() => {
     const fetchRepos = async () => {
       try {
-        const cacheKey = 'portfolio_repos_cache'
-        const cacheTimeKey = 'portfolio_repos_cache_time'
+        const cacheKey = 'portfolio_repos_cache_v2'
+        const cacheTimeKey = 'portfolio_repos_cache_time_v2'
         const cached = localStorage.getItem(cacheKey)
         const cachedTime = localStorage.getItem(cacheTimeKey)
 
@@ -213,7 +241,7 @@ export function Projects() {
         }
       } catch (err) {
         // Fallback to FALLBACK_REPOS if fetch fails or rate limited
-        const staleCache = localStorage.getItem('portfolio_repos_cache')
+        const staleCache = localStorage.getItem('portfolio_repos_cache_v2')
         if (staleCache) {
           try {
             setRepos(JSON.parse(staleCache))
